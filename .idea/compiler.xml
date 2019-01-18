@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bai-cheng-commons" />
+        <module name="bai-cheng-domain" />
+        <module name="bai-cheng-web-admin" />
+        <module name="bai-cheng-web-api" />
+        <module name="bai-cheng-web-ui" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bai-cheng" target="1.5" />
+      <module name="bai-cheng-commons" target="1.8" />
+      <module name="bai-cheng-dependencies" target="1.8" />
+      <module name="bai-cheng-domain" target="1.8" />
+      <module name="bai-cheng-web-admin" target="1.8" />
+      <module name="bai-cheng-web-api" target="1.8" />
+      <module name="bai-cheng-web-ui" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
