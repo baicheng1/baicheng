@@ -1,0 +1,4 @@
+com\duo\bai\cheng\commons\dto\BaseResult.class
+com\duo\bai\cheng\commons\dto\PageInfo.class
+com\duo\bai\cheng\commons\validator\BeanValidator.class
+com\duo\bai\cheng\commons\util\CookieUtils.class

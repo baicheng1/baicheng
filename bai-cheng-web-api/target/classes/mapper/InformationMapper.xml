@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.InformationDao">
+
+    <select id="selectAll" resultType="Tb_User">
+        SELECT
+           id,
+            pname,
+            PASSWORD,
+            phone,
+            email,
+            created,
+            icard,
+            address,
+            pid,
+            nickname
+            FROM
+            per_user
+            WHERE
+            id = #{id}
+    </select>
+    <select id="selectAllS" resultType="TbPerUser">
+        SELECT
+            id,
+          cname,
+          PASSWORD,
+          phone,
+          email,
+          bcode,
+          icard,
+          created,
+          address,
+          pid,
+          nickname
+            FROM
+            com_user
+            WHERE
+            id = #{id}
+    </select>
+</mapper>

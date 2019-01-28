@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.InformationDao1">
+    <sql id="selectContext">
+            a.id,
+            a.info_name as infoName,
+            a.info_url as infoUrl,
+            a.info_content as infoContent,
+            a.info_type as infoType,
+            a.info_created as infoCreated
+    </sql>
+    <select id="selectAllInfo" resultType="Information">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        information AS a
+    </select>
+    <select id="selectById" resultType="Information">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        information AS a
+        WHERE
+        a.id=#{id}
+    </select>
+</mapper>

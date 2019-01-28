@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.LiCaiDao1">
+
+    <sql id="LiCaiColumns">
+          a.id,
+          a.time,
+          a.created,
+          a.rate,
+          a.name,
+          a.money,
+          a.interest,
+          a.uname,
+          a.uid
+
+    </sql>
+
+    <select id="selectBy1" resultType="LiCai">
+        SELECT
+        <include refid="LiCaiColumns"/>
+        FROM
+        orders as a
+        WHERE
+        created>DATE_SUB(CURDATE(), INTERVAL 1 MONTH) and uid = #{uid}
+
+    </select>
+
+    <select id="selectBy3" resultType="LiCai">
+        SELECT
+        <include refid="LiCaiColumns"/>
+        FROM
+        orders as a
+        WHERE
+        created>DATE_SUB(CURDATE(), INTERVAL 3 MONTH) and uid = #{uid}
+
+    </select>
+
+    <select id="selectBy6" resultType="LiCai">
+        SELECT
+        <include refid="LiCaiColumns"/>
+        FROM
+        orders as a
+        WHERE
+        created>DATE_SUB(CURDATE(), INTERVAL 6 MONTH) and uid = #{uid}
+
+    </select>
+
+    <select id="selectByDate" resultType="LiCai">
+        SELECT
+        <include refid="LiCaiColumns"/>
+        FROM
+        orders as a
+        WHERE
+        uid = #{2} and created between #{0} and #{1}
+
+    </select>
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.admin.dao.NoticeDao">
+    <sql id="selectContext">
+            a.id,
+            a.jijin_id as jiJinId,
+            a.notice_name as noticeName,
+            a.notice_url as noticeUrl,
+            a.notice_content as noticeContent,
+            a.notice_type as noticeType,
+            a.notice_created as noticeCreated
+    </sql>
+    <select id="selectById" resultType="Notice">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        notice AS a
+        WHERE a.id=#{id}
+    </select>
+
+    <delete id="deleteNotices">
+        DELETE FROM notice
+        WHERE id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <select id="selectAllNotice" resultType="Notice">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        notice AS a
+    </select>
+
+    <insert id="insert">
+        INSERT INTO notice (
+           jijin_id,
+           notice_name,
+           notice_url,
+           notice_content,
+           notice_type,
+           notice_created
+        )
+        VALUES
+          (
+            #{jiJinId},
+            #{noticeName},
+            #{noticeUrl},
+            #{noticeContent},
+            #{noticeType},
+            #{noticeCreated}
+          )
+    </insert>
+    <delete id="deleteById">
+        DELETE FROM notice WHERE id = #{id}
+    </delete>
+
+    <select id="selectBySearch" resultType="Notice">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        notice AS a
+        WHERE 1!=1
+        OR a.notice_name LIKE CONCAT('%',#{keyword},'%')
+        OR a.notice_content LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM notice AS a
+    </select>
+
+    <update id="updateNotice">
+        UPDATE
+          notice
+        SET
+          jijin_id = #{jiJinId},
+          notice_name = #{noticeName},
+          notice_url = #{noticeUrl},
+          notice_content=#{noticeContent},
+          notice_type=#{noticeType}
+        WHERE
+          id = #{id}
+    </update>
+
+    <select id="countBySearch" resultType="java.lang.Integer">
+        SELECT count(*) FROM  notice AS a
+        WHERE 1!=1
+            OR a.notice_name LIKE CONCAT('%',#{keyword},'%')
+            OR a.notice_content LIKE CONCAT('%',#{keyword},'%')
+    </select>
+    <select id="selectAllJiJinId" resultType="java.lang.Integer">
+        SELECT id FROM  jijin
+    </select>
+</mapper>

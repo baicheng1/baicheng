@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.admin.dao.OrderDao">
+    <sql id="selectContext">
+           a.id,
+           a.time,
+           a.created,
+           a.rate,
+           a.name,
+           a.money,
+           a.interest,
+           a.uname
+    </sql>
+
+    <select id="selectById" resultType="Order">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        orders AS a
+        WHERE a.id=#{id}
+    </select>
+
+
+    <select id="selectAllOrder" resultType="Order">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        orders AS a
+    </select>
+    <insert id="insert">
+        INSERT INTO orders (
+           time,
+           created,
+           rate,
+           name,
+           money,
+           interest,
+           uname
+        )
+        VALUES
+          (
+            #{time},
+            #{created},
+            #{rate},
+            #{name},
+            #{money},
+            #{interest},
+            #{uname}
+          )
+    </insert>
+
+    <delete id="deleteById">
+        DELETE FROM orders WHERE id = #{id}
+    </delete>
+
+    <select id="selectBySearch" resultType="Order">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        orders AS a
+        WHERE 1!=1
+        OR a.name LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM orders AS a
+    </select>
+
+    <delete id="deleteOrders">
+        DELETE FROM orders
+        WHERE id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateOrder">
+        UPDATE
+          orders
+        SET
+          time=${time},
+          rate=${rate},
+          name=${name},
+          money=${money},
+          interest=${interest},
+          uname=${uname}
+        WHERE
+          id = #{id}
+    </update>
+
+    <select id="countBySearch" resultType="java.lang.Integer">
+        SELECT count(*) FROM  orders AS a
+        WHERE 1!=1
+            OR a.name LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+
+
+    <!--<select id="selectAllNotice" resultType="Notice">-->
+        <!--SELECT-->
+        <!--<include refid="selectContext"/>-->
+        <!--FROM-->
+        <!--notice AS a-->
+    <!--</select>-->
+
+    <!--<insert id="addOrder">-->
+        <!--INSERT INTO `order` ( `time`, `created`, `rate`, `name`, `money`, `interest`, `uname`)-->
+        <!--VALUES-->
+<!--&#45;&#45;         ( '1', '2018-12-31', '1', '1', '1', '1')-->
+        <!--(-->
+        <!--#{time},-->
+        <!--#{created},-->
+        <!--#{rate},-->
+        <!--#{name},-->
+        <!--#{money},-->
+        <!--#{interest},-->
+        <!--#{uname}-->
+        <!--)-->
+    <!--</insert>-->
+</mapper>

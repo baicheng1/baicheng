@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.OrderDao">
+    <sql id="selectContext">
+           a.id,
+           a.time,
+           a.created,
+           a.rate,
+           a.name,
+           a.money,
+           a.interest
+    </sql>
+    <select id="selectAllNotice" resultType="Notice">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        notice AS a
+    </select>
+
+    <insert id="addOrder">
+        INSERT INTO orders ( `time`, `created`, `rate`, `name`, `money`, `interest`, `uname`,`uid`)
+        VALUES
+--         ( '1', '2018-12-31', '1', '1', '1', '1')
+        (
+        #{time},
+        #{created},
+        #{rate},
+        #{name},
+        #{money},
+        #{interest},
+        #{uname},
+        #{uid}
+        )
+    </insert>
+</mapper>

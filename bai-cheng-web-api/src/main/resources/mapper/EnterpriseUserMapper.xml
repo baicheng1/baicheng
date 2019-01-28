@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.EnterpriseUserDao">
+
+    <sql id="enterpriseUserColumns">
+
+            a.id,
+            a.cname,
+            a.password,
+            a.phone,
+            a.email,
+            a.bcode,
+            a.icard,
+            a.created,
+            a.address,
+            a.nickname,
+            a.pid
+
+
+    </sql>
+
+    <select id="select" resultType="EnterpriseUser">
+        SELECT
+        <include refid="enterpriseUserColumns"/>
+        FROM
+        com_user as a
+
+        WHERE
+        cname = #{cname}
+        OR phone = #{phone}
+        OR email = #{email}
+
+    </select>
+
+<insert id="register">
+
+    INSERT INTO  com_user (
+        cname,
+        password,
+        phone,
+        email,
+        created,
+        nickname
+        )
+        VALUES
+        (
+        #{cname},
+        #{password},
+        #{phone},
+        #{email},
+        #{created},
+        #{nickname}
+        )
+
+</insert>
+
+</mapper>

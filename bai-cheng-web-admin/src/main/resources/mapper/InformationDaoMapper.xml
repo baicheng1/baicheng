@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.admin.dao.InformationDao">
+    <sql id="selectContext">
+            a.id,
+            a.info_name as infoName,
+            a.info_url as infoUrl,
+            a.info_content as infoContent,
+            a.info_type as infoType,
+            a.info_created as infoCreated
+    </sql>
+    <select id="selectAllInformation" resultType="Information">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        information AS a
+    </select>
+    <select id="selectById" resultType="Information">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        information AS a
+        WHERE
+        a.id=#{id}
+    </select>
+    <insert id="insert">
+        INSERT INTO information (
+           info_name,
+           info_url,
+           info_content,
+           info_type,
+           info_created
+        )
+        VALUES
+          (
+            #{infoName},
+            #{infoUrl},
+            #{infoContent},
+            #{infoType},
+            #{infoCreated}
+          )
+    </insert>
+
+    <select id="selectBySearch" resultType="Information">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        information AS a
+        WHERE 1!=1
+        OR a.info_name LIKE CONCAT('%',#{keyword},'%')
+        OR a.info_content LIKE CONCAT('%',#{keyword},'%')
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM information AS a
+    </select>
+
+    <delete id="deleteInfos">
+        DELETE FROM information
+        WHERE id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateInformation">
+        UPDATE
+          information
+        SET
+          info_name =   #{infoName},
+          info_url =    #{infoUrl},
+          info_content= #{infoContent},
+          info_type=    #{infoType}
+        WHERE
+          id = #{id}
+    </update>
+    <select id="countBySearch" resultType="java.lang.Integer">
+        SELECT count(*) FROM  information AS a
+        WHERE 1!=1
+            OR a.info_name LIKE CONCAT('%',#{keyword},'%')
+            OR a.info_content LIKE CONCAT('%',#{keyword},'%')
+    </select>
+    <delete id="deleteById">
+        DELETE FROM information WHERE id = #{id}
+    </delete>
+    <!--<select id="selectAllInfoType" resultType="java.lang.String">-->
+        <!--SELECT info_type FROM  information-->
+    <!--</select>-->
+</mapper>

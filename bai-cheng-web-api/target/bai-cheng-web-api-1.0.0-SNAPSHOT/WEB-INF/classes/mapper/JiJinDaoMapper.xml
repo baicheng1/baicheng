@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.JiJinDao">
+    <sql id="selectContext">
+            a.id,
+            a.order,
+            a.type,
+            a.name,
+            a.apply,
+            a.buy_back as buyBack,
+            a.service_charge as serviceCharge,
+            a.url,
+            a.unit_netvalue as unitNetvalue,
+            a.cumulative_netvalue as cumulativeNetvalue,
+            a.week,
+            a.onemonth,
+            a.threemonths,
+            a.sixmonths,
+            a.year,
+            a.threeyear
+    </sql>
+    <select id="selectAllJiJin" resultType="JiJin">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        jijin AS a
+        ORDER  BY a.order DESC
+    </select>
+
+    <select id="getJiJinById" resultType="JiJin">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        jijin AS a
+        WHERE
+        a.id=#{id}
+    </select>
+    <select id="search" resultType="JiJin">
+            SELECT
+            <include refid="selectContext"/>
+            FROM
+            jijin AS a
+            WHERE 1=1
+            <if test="jiJinId != null and jiJinId != ''">
+                AND a.id LIKE CONCAT('%',#{jiJinId},'%')
+            </if>
+            <if test="jiJinName != null and jiJinName != ''">
+                AND a.name LIKE CONCAT('%',#{jiJinName},'%')
+            </if>
+    </select>
+    <select id="selectHot" resultType="JiJin">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        jijin AS a
+        ORDER BY a.order LIMIT 0,5
+    </select>
+</mapper>

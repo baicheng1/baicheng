@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.JiJinDao1">
+    <sql id="jiJinColumns">
+        a.id,
+        a.order,
+        a.type,
+        a.name,
+        a.apply,
+        a.buy_back AS buyBack,
+        a.service_charge AS serviceCharge,
+        a.url,
+        a.unit_netvalue AS unitNetvalue,
+        a.cumulative_netvalue AS cumulativenetvalue ,
+        a.week,
+        a.onemonth,
+        a.threemonths,
+        a.sixmonths,
+        a.year,
+        a.threeyear
+    </sql>
+
+    <select id="findAll" resultType="JiJin">
+        SELECT
+        <include refid="jiJinColumns"/>
+        FROM
+        jijin AS a
+    </select>
+
+    <select id="findOne" resultType="JiJin">
+        SELECT
+        <include refid="jiJinColumns"/>
+        FROM
+        jijin AS a
+        WHERE a.id=#{id}
+    </select>
+
+    <insert id="insertJiJin">
+        INSERT INTO jijin(
+            id,
+            order,
+            type,
+            name,
+            apply,
+            buy_back,
+            service_charge,
+            url,
+            unit_netvalue,
+            cumulative_netvalue,
+            week,
+            onemonth，
+            threemonths,
+            sixmonths，
+            year，
+            threeyear
+        ) values (
+                    #{id},
+                    #{order},
+                    #{type},
+                    #{name},
+                    #{apply}
+                    #{buyBack}，
+                    #{serviceCharge},
+                    #{url},
+                    #{unitNetvalue},
+                    #{cumulativeNetvalue},
+                    #{week},
+                    #{onemonth},
+                    #{threemonths},
+                    #{sixmonths},
+                    #{year},
+                    #{threeyear}
+        )
+    </insert>
+
+    <delete id="deleteById">
+        DELETE
+        FROM jijin
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateJiJin">
+      UPDATE
+      jijin
+        SET
+            order=#{order},
+            type=#{type},
+            name=#{name},
+            apply=#{apply},
+            buy_back= #{buyBack},
+            service_charge=#{serviceCharge},
+            url=#{url},
+            unit_netvalue=#{unitNetvalue},
+            cumulative_netvalue=#{cumulativeNetvalue},
+            week=#{week},
+            onemonth=#{onemonth},
+            threemonths= #{threemonths},
+            sixmonths#{sixmonths},
+            year=#{year}
+            threeyear=#{threeyear}
+        WHERE id = #{id}
+
+    </update>
+</mapper>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.TbBorrowDao">
+    <sql id="tbComUserColumns">
+        a.id,
+        a.cname,
+        a.password,
+        a.phone,
+        a.email,
+        a.bcode,
+        a.icard,
+        a.created,
+        a.address,
+        a.nickname,
+        a.pid,
+        a.mainname,
+        a.mainphone,
+        a.relation
+    </sql>
+
+    <sql id="tbPerUserColumns">
+     b.id,
+     b.pname,
+     b.password,
+     b.phone,
+     b.email,
+     b.created,
+     b.icard,
+     b.address,
+     b.nickname,
+     b.pid,
+     b.mainname,
+     b.mainphone,
+     b.relation
+    </sql>
+
+
+    <sql id="tbBorrowLoanColumns">
+     c.credit_id AS creditId,
+     c.name,
+     c.pid,
+     c.jie_money AS jieMoney,
+     c.month,
+     c.repaytime,
+     c.createtime,
+     c.huan_money AS huanMoney,
+     c.total_interest AS totalInterest,
+     c.per_money AS perMoney,
+     c.per_interest AS perInterest,
+     c.day_interest AS dayInterest,
+     c.uid
+
+    </sql>
+
+
+
+    <select id="selectComUserById" resultType="ComUser">
+        SELECT
+        <include refid="tbComUserColumns"/>
+        FROM
+        com_user AS a
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="selectPerUserById" resultType="PerUser">
+        SELECT
+        <include refid="tbPerUserColumns"/>
+        FROM
+        per_user AS b
+        WHERE b.id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="BorrowLoan">
+        SELECT
+        <include refid="tbBorrowLoanColumns"/>
+        FROM
+        credit AS c
+        WHERE c.pid =#{pid}
+        AND c.name=#{name}
+
+    </select>
+
+    <select id="selectByCreditId" resultType="BorrowLoan">
+        SELECT
+        <include refid="tbBorrowLoanColumns"/>
+        FROM
+        credit AS c
+        WHERE c.credit_id= #{creditId}
+    </select>
+
+
+
+
+    <insert id="insert" >
+        INSERT INTO credit (
+          name,
+          pid,
+          jie_money ,
+          month,
+          repaytime,
+          createtime,
+          huan_money,
+          total_interest,
+          per_money,
+          per_interest,
+          day_interest,
+          uid
+        )
+        VALUES
+          (
+           #{name},
+           #{pid},
+           #{jieMoney},
+           #{month},
+           #{repaytime},
+           #{createtime},
+           #{huanMoney},
+           #{totalInterest},
+           #{perMoney},
+           #{perInterest},
+           #{dayInterest},
+           #{uid}
+          )
+    </insert>
+
+    <update id="update">
+       UPDATE
+          credit
+        SET
+          month=#{month},
+          huan_money=#{huanMoney},
+          total_interest=#{totalInterest}
+        WHERE credit_id = #{creditId}
+    </update>
+
+
+    <update id="updatePer">
+       UPDATE
+          per_user
+        SET
+          phone=#{phone},
+          email=#{email},
+          icard=#{icard},
+          address=#{address},
+          mainname=#{mainname},
+          mainphone=#{mainphone},
+          relation=#{relation}
+        WHERE id = #{id}
+    </update>
+
+
+    <update id="updateCom">
+       UPDATE
+          com_user
+        SET
+           phone=#{phone},
+           email=#{email},
+           bcode=#{bcode},
+           icard=#{icard},
+           address=#{address},
+           mainname=#{mainname},
+           mainphone=#{mainphone},
+           relation=#{relation}
+        WHERE id = #{id}
+    </update>
+
+
+
+
+    <delete id="delete">
+        DELETE
+          *
+        FROM
+          credit AS e
+        WHERE  e.credit_id= #{creditId}
+    </delete>
+
+
+
+
+
+
+
+</mapper>

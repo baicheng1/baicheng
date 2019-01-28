@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.TbPerUserDao">
+    <select id="login" resultType="TbPerUser">
+        SELECT
+             id,
+              cname,
+              PASSWORD,
+              phone,
+              email,
+              bcode,
+              icard,
+              created,
+              address,
+              pid
+            FROM
+            com_user
+            where
+            cname = #{cname}
+            OR phone = #{cname}
+            OR email = #{cname}
+    </select>
+    <select id="selectAll" resultType="TbPerUser">
+        SELECT
+         id,
+          cname,
+          PASSWORD,
+          phone,
+          email,
+          bcode,
+          icard,
+          created,
+          address,
+          pid
+            FROM
+            com_user
+    </select>
+</mapper>

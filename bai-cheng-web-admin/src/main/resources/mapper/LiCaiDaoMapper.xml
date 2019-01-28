@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.LiCaiDao">
+    <sql id="selectContext">
+            a.pid,
+            a.pname,
+            a.ptype,
+            a.startprice,
+            a.time,
+            a.returnrate,
+            a.created
+    </sql>
+    <select id="selectById" resultType="LCProduct">
+        SELECT
+        <include refid="selectContext"/>
+        FROM
+        licai_product AS a
+        where
+        a.pid=#{pid}
+    </select>
+</mapper>

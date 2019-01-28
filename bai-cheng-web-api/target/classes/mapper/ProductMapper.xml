@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.ProductDao">
+    <sql id="ProductColumns">
+        a.pid,
+        a.pname,
+        a.ptype,
+        a.startprice,
+        a.time,
+        a.returnrate,
+        a.created
+    </sql>
+    
+    <select id="findAllByType" resultType="Product">
+        SELECT
+        <include refid="ProductColumns"/>
+        FROM
+        licai_product AS a
+        WHERE
+        a.ptype=#{ptype}
+    </select>
+
+    <select id="findAllByCreated" resultType="Product">
+        SELECT
+        <include refid="ProductColumns"/>
+        FROM
+        licai_product AS a
+        WHERE a.ptype=0
+        ORDER BY
+        created DESC
+        LIMIT 4
+    </select>
+
+    <select id="findAllByReturnrate" resultType="Product">
+        SELECT
+        <include refid="ProductColumns"/>
+        FROM
+        licai_product AS a
+        WHERE a.ptype=0
+        ORDER BY
+        returnrate DESC
+        LIMIT 4
+    </select>
+    <select id="findAllByTypeAndId" resultType="Product" parameterType="java.util.Map">
+        SELECT
+        <include refid="ProductColumns"/>
+        FROM
+        licai_product AS a
+        WHERE
+        a.ptype=#{ptype} and
+        a.pid=#{pid}
+    </select>
+</mapper>

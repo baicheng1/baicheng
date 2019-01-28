@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.admin.dao.JiJinDao">
+    <sql id="jiJinColumns">
+        a.id,
+        a.order,
+        a.type,
+        a.name,
+        a.apply,
+        a.buy_back AS buyBack,
+        a.service_charge AS serviceCharge,
+        a.url,
+        a.unit_netvalue AS unitNetvalue,
+        a.cumulative_netvalue AS cumulativeNetvalue ,
+        a.week,
+        a.onemonth,
+        a.threemonths,
+        a.sixmonths,
+        a.year,
+        a.threeyear
+    </sql>
+
+    <select id="findAll" resultType="JiJin">
+        SELECT
+        <include refid="jiJinColumns"/>
+        FROM
+        jijin AS a
+    </select>
+
+    <select id="findOne" resultType="JiJin">
+        SELECT
+        <include refid="jiJinColumns"/>
+        FROM
+        jijin AS a
+        WHERE a.id=#{id}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM jijin AS a
+    </select>
+    <insert id="insertJiJin">
+        INSERT INTO jijin  (
+            `order`,
+            `type`,
+            `name`,
+            apply,
+            buy_back,
+            service_charge,
+            url,
+            unit_netvalue,
+            cumulative_netvalue,
+            `week`,
+            onemonth,
+            threemonths,
+            sixmonths,
+            `year`,
+            threeyear
+        ) values (
+                    #{order},
+                    #{type},
+                    #{name},
+                    #{apply},
+                    #{buyBack},
+                    #{serviceCharge},
+                    #{url},
+                    #{unitNetvalue},
+                    #{cumulativeNetvalue},
+                    #{week},
+                    #{onemonth},
+                    #{threemonths},
+                    #{sixmonths},
+                    #{year},
+                    #{threeyear}
+        )
+    </insert>
+
+    <delete id="deleteById">
+        DELETE
+        FROM jijin
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateJiJin">
+      UPDATE
+      jijin  as a
+        SET
+            a.order=#{order},
+            a.type=#{type},
+           a.name=#{name},
+            a.apply=#{apply},
+            a.buy_back= #{buyBack},
+            a.service_charge=#{serviceCharge},
+            a.url=#{url},
+           a.unit_netvalue=#{unitNetvalue},
+            a.cumulative_netvalue=#{cumulativeNetvalue},
+            a.week=#{week},
+            a.onemonth=#{onemonth},
+            a.threemonths=#{threemonths},
+            a.sixmonths=#{sixmonths},
+            a.year=#{year},
+            a.threeyear=#{threeyear}
+        WHERE
+         a.id = #{id}
+
+    </update>
+    <delete id="deleteJiJins">
+        DELETE FROM jijin
+        WHERE id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

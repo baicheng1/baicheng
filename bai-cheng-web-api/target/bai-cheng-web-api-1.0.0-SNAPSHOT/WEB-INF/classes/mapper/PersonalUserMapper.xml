@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.PersonalUserDao">
+
+    <sql id="personalUserColumns">
+
+            a.id,
+            a.pname,
+            a.password,
+            a.phone,
+            a.email,
+            a.created,
+            a.icard,
+            a.address,
+            a.nickname
+
+    </sql>
+
+    <select id="select" resultType="PersonalUser">
+        SELECT
+        <include refid="personalUserColumns"/>
+        FROM
+        per_user as a
+        WHERE
+        pname = #{pname}
+        OR phone = #{phone}
+        OR email = #{email}
+
+    </select>
+
+<insert id="register">
+
+    INSERT INTO per_user (
+        pname,
+        password,
+        phone,
+        email,
+        created,
+        nickname
+        )
+        VALUES
+        (
+        #{pname},
+        #{password},
+        #{phone},
+        #{email},
+        #{created},
+        #{nickname}
+        )
+
+</insert>
+
+
+</mapper>

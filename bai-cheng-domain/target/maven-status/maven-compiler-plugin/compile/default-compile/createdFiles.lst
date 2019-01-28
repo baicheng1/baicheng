@@ -1,0 +1,6 @@
+com\duo\bai\cheng\domain\TbModify.class
+com\duo\bai\cheng\domain\Tbcredit.class
+com\duo\bai\cheng\domain\Tbhotai.class
+com\duo\bai\cheng\domain\TbOrder.class
+com\duo\bai\cheng\domain\TbPerUser.class
+com\duo\bai\cheng\domain\Tb_User.class

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.admin.dao.UserDao">
+    <sql id="UserColumns">
+         a.uid,
+         a.username,
+         a.password,
+         a.type,
+         a.email,
+         a.phone
+    </sql>
+    <!--<sql id="TbContentJoins">-->
+    <!--LEFT JOIN tb_content_category AS b ON a.category_id = b.id-->
+    <!--</sql>-->
+
+    <select id="selectById" resultType="User">
+        SELECT
+        <include refid="UserColumns"/>
+        FROM
+        tb_user AS a
+        WHERE a.uid = #{id}
+    </select>
+
+    <select id="selectAllUser" resultType="User">
+        SELECT
+        <include refid="UserColumns"/>
+        FROM
+        tb_user AS a
+    </select>
+
+    <update id="changeType">
+        UPDATE
+          tb_user
+        SET
+          username = #{username},
+          password = #{password},
+          type = #{type}
+        WHERE
+          uid = #{uid}
+    </update>
+
+    <insert id="insert">
+        INSERT INTO tb_user (
+        username,
+        password,
+        type,
+        email,
+        phone
+        )
+        VALUES
+          (
+            #{username},
+            #{password},
+            #{type},
+             #{email},
+              #{phone}
+          )
+    </insert>
+
+    <delete id="deleteById">
+        DELETE FROM tb_user WHERE uid = #{id}
+    </delete>
+
+    <select id="selectBySearch" resultType="User">
+        SELECT
+        <include refid="UserColumns"/>
+        FROM
+        tb_user AS a
+        WHERE 1!=1
+        OR a.username LIKE CONCAT('%',#{keyword},'%')
+        OR a.password LIKE CONCAT('%',#{keyword},'%')
+        OR a.phone LIKE CONCAT('%',#{keyword},'%')
+        OR a.email LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM tb_user AS a
+        <where>
+            <if test="username != null and username != ''">
+                AND a.username LIKE CONCAT('%',#{username},'%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteUsers">
+        DELETE FROM tb_user
+        WHERE uid IN
+        <foreach collection="array" open="(" close=")" separator="," item="uid">
+            #{uid}
+        </foreach>
+    </delete>
+
+    <update id="updateUser">
+        UPDATE
+          tb_user
+        SET
+          username = #{username},
+          password = #{password},
+          type = #{type},
+          email=#{email},
+          phone=#{phone}
+        WHERE
+          uid = #{uid}
+    </update>
+
+    <select id="countBySearch" resultType="java.lang.Integer">
+        SELECT count(*) FROM  tb_user AS a
+        WHERE 1!=1
+            OR a.username LIKE CONCAT('%',#{keyword},'%')
+            OR a.password LIKE CONCAT('%',#{keyword},'%')
+            OR a.phone LIKE CONCAT('%',#{keyword},'%')
+            OR a.email LIKE CONCAT('%',#{keyword},'%')
+    </select>
+</mapper>

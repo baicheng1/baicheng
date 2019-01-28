@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.ModifyDao">
+        <update id="update">
+            UPDATE com_user
+              SET PASSWORD = #{passwords}
+              WHERE id = #{id}
+        </update>
+    <update id="updates">
+            UPDATE per_user
+              SET PASSWORD = #{passwords}
+              WHERE id = #{id}
+        </update>
+    <update id="upnick">
+            UPDATE com_user
+              SET nickname = #{nickname}
+              WHERE id = #{id}
+        </update>
+    <update id="upnicks">
+            UPDATE per_user
+              SET nickname = #{nickname}
+              WHERE id = #{id}
+        </update>
+    <update id="upemail">
+            UPDATE com_user
+              SET email = #{email}
+              WHERE id = #{id}
+        </update>
+    <update id="upemails">
+            UPDATE per_user
+              SET email = #{email}
+              WHERE id = #{id}
+        </update>
+    <update id="upphone">
+            UPDATE com_user
+              SET phone = #{phone}
+              WHERE id = #{id}
+        </update>
+    <update id="upphones">
+            UPDATE per_user
+              SET phone = #{phone}
+              WHERE id = #{id}
+        </update>
+    <update id="upicard">
+            UPDATE com_user
+              SET icard = #{icard}
+              WHERE id = #{id}
+        </update>
+    <update id="upicards">
+            UPDATE per_user
+              SET icard = #{icard}
+              WHERE id = #{id}
+        </update>
+</mapper>

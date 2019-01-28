@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duo.bai.cheng.web.api.dao.CreditDao">
+    <select id="select" resultType="Tbcredit">
+        SELECT
+          credit_id as creditId,
+          NAME,
+          pid,
+          jie_money as jieMoney,
+          MONTH,
+          repaytime,
+          createtime,
+          huan_money as huanMoney,
+          total_interest as totalInterest,
+          per_money as perMoney,
+          per_interest as perInterest,
+          day_interest as dayInterest
+            FROM
+            credit
+            WHERE
+            name = #{name}
+    </select>
+  <select id="selects" resultType="TbOrder">
+      SELECT
+        id,
+        TIME,
+        created,
+        rate,
+        NAME,
+        money,
+        interest,
+        uname
+        FROM
+        orders
+        WHERE
+        uname = #{name}
+  </select>
+</mapper>
